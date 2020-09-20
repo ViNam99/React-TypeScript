@@ -15,6 +15,10 @@ class SanPham extends Component<SanPhamProps> {
           <h5 className="card-title">{sanpham.name}</h5>
           <p className="card-text">{sanpham.description}</p>
         </div>
+        <div className="card-footer">
+          <button className="btn btn-success mr-2">Mua</button>
+          <button className="btn btn-primary ml-2">Xem</button>
+        </div>
       </div>
     );
   };
