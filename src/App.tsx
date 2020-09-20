@@ -1,10 +1,11 @@
-import React from 'react'
-const App:React.FC = () => {
+import React from "react";
+import BaiTapGioHangClass from "./components/BaiTapGioHangClass";
+const App: React.FC = () => {
   return (
-    <div>
-      
+    <div className="container my-3">
+      <BaiTapGioHangClass />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
