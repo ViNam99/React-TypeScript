@@ -3,9 +3,10 @@ import DienThoaiType from "../../models/DienThoaiType";
 interface SanPhamProps {
   sanpham: DienThoaiType;
   key: number;
+  handleXemChiTietSanPhamDS?: (sanpham: DienThoaiType) => void;
 }
 const SanPham: React.FC<SanPhamProps> = (props) => {
-  const { sanpham } = props;
+  const { sanpham, handleXemChiTietSanPhamDS } = props;
   const renderSanPham = (): JSX.Element => {
     return (
       <div className="card" style={{ width: "18rem" }}>
@@ -16,7 +17,12 @@ const SanPham: React.FC<SanPhamProps> = (props) => {
         </div>
         <div className="card-footer">
           <button className="btn btn-success mr-2">Mua</button>
-          <button className="btn btn-primary ml-2">Xem</button>
+          <button
+            className="btn btn-primary ml-2"
+            onClick={() => handleXemChiTietSanPhamDS?.(sanpham)}
+          >
+            Xem
+          </button>
         </div>
       </div>
     );

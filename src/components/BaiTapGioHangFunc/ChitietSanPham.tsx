@@ -1,11 +1,45 @@
-import React from 'react'
-
-const ChitietSanPham: React.FC  = () => {
-    return (
-        <div>
-            
-        </div>
-    )
+import React from "react";
+import DienThoaiType from "../../models/DienThoaiType";
+interface ChitietSanPhamProps {
+  chitiet: DienThoaiType;
 }
+const ChitietSanPham: React.FC<ChitietSanPhamProps> = (props) => {
+  const { chitiet } = props;
 
-export default ChitietSanPham
+  return (
+    <div className="row mt-5">
+      <div className="col-lg-6">
+        <img
+          src={chitiet.image}
+          className="card-img-top"
+          alt="..."
+          height="400px"
+        />
+      </div>
+      <div className="col-lg-6">
+        <table className="table">
+          <tbody>
+            <tr>
+              <th>Tên điện thoại</th>
+              <td>{chitiet.name}</td>
+            </tr>
+            <tr>
+              <th>Mô tả</th>
+              <td>{chitiet.description}</td>
+            </tr>
+            <tr>
+              <th>Giá</th>
+              <td>{chitiet.price}$</td>
+            </tr>
+            <tr>
+              <th>Hàng tồn</th>
+              <td>{chitiet.invetory}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+export default ChitietSanPham;
