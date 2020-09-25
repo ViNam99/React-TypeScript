@@ -1,9 +1,11 @@
 import React from "react";
-import BaiTapGioHangClass from "./components/BaiTapGioHangClass";
+import BaiTapGioHangFunc from "./components/BaiTapGioHangFunc";
+// import BaiTapGioHangClass from "./components/BaiTapGioHangClass";
 const App: React.FC = () => {
   return (
     <div className="container my-3">
-      <BaiTapGioHangClass />
+      {/* <BaiTapGioHangClass /> */}
+      <BaiTapGioHangFunc/>
     </div>
   );
 };
