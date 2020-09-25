@@ -32,6 +32,13 @@ const BaiTapGioHangFunc: React.FC = () => {
     setGiohang(listGioHang);
   };
 
+  const handleXoaSanPham = (id: number): void => {
+    const listGioHang = [...gioHang];
+    const index = findIndexByID(listGioHang, id);
+    index !== -1 && listGioHang.splice(index, 1);
+    setGiohang(listGioHang)
+  };
+
   const totalSanPham = gioHang.reduce((total, spGioHang) => {
     return (total += spGioHang.soLuong);
   }, 0);
@@ -58,7 +65,7 @@ const BaiTapGioHangFunc: React.FC = () => {
         <p className="text-center text-danger p-5">Không có sản phẩm nào</p>
       )}
 
-      <ModalSanPham gioHang={gioHang} />
+      <ModalSanPham gioHang={gioHang} handleXoaSanPhamRoot={handleXoaSanPham} />
     </>
   );
 };
