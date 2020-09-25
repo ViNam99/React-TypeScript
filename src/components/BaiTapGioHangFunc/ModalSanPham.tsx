@@ -4,9 +4,10 @@ import SanPhamGioHangType from "../../models/SanPhamGioHangType";
 interface ModalProps {
   gioHang: SanPhamGioHangType[];
   handleXoaSanPhamRoot?: (id: number) => void;
+  hanldeTangGiamSLRoot?: (id: number, bool: boolean) => void;
 }
 const ModalSanPham: React.FC<ModalProps> = (props) => {
-  const { gioHang, handleXoaSanPhamRoot } = props;
+  const { gioHang, handleXoaSanPhamRoot, hanldeTangGiamSLRoot } = props;
 
   const renderSanPhamTrongGioHang = (): JSX.Element[] => {
     return gioHang.map((sp, index) => {
@@ -18,9 +19,19 @@ const ModalSanPham: React.FC<ModalProps> = (props) => {
             <img src={sp.image} alt="img" width="50px" height="50px" />
           </td>
           <td>
-            <button className="btn btn-primary mr-2">-</button>
+            <button
+              className="btn btn-primary mr-2"
+              onClick={() => hanldeTangGiamSLRoot?.(sp.id, false)}
+            >
+              -
+            </button>
             {sp.soLuong}
-            <button className="btn btn-primary ml-2">+</button>
+            <button
+              className="btn btn-primary ml-2"
+              onClick={() => hanldeTangGiamSLRoot?.(sp.id, true)}
+            >
+              +
+            </button>
           </td>
           <td>{sp.price}</td>
           <td>{sp.price * sp.soLuong}</td>

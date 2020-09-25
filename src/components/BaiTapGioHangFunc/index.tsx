@@ -16,6 +16,7 @@ const BaiTapGioHangFunc: React.FC = () => {
   const handleXemChiTietSanPham = (sannpham: DienThoaiType): void => {
     setchitietSP(sannpham);
   };
+
   const handleMuaSanPham = (sanpham: DienThoaiType): void => {
     const sanPhamGioHang: SanPhamGioHangType = {
       id: sanpham.id,
@@ -36,7 +37,17 @@ const BaiTapGioHangFunc: React.FC = () => {
     const listGioHang = [...gioHang];
     const index = findIndexByID(listGioHang, id);
     index !== -1 && listGioHang.splice(index, 1);
-    setGiohang(listGioHang)
+    setGiohang(listGioHang);
+  };
+
+  const hanldeTangGiamSL = (id: number, bool: boolean): void | null=> {
+    const listGioHang = [...gioHang];
+    const index = findIndexByID(listGioHang, id);
+    if (index === -1) return null;
+    if (bool) listGioHang[index].soLuong += 1;
+    if (!bool) listGioHang[index].soLuong -= 1;
+    if (listGioHang[index].soLuong < 1) listGioHang.splice(index, 1);
+    setGiohang(listGioHang);
   };
 
   const totalSanPham = gioHang.reduce((total, spGioHang) => {
@@ -65,7 +76,11 @@ const BaiTapGioHangFunc: React.FC = () => {
         <p className="text-center text-danger p-5">Không có sản phẩm nào</p>
       )}
 
-      <ModalSanPham gioHang={gioHang} handleXoaSanPhamRoot={handleXoaSanPham} />
+      <ModalSanPham
+        gioHang={gioHang}
+        handleXoaSanPhamRoot={handleXoaSanPham}
+        hanldeTangGiamSLRoot={hanldeTangGiamSL}
+      />
     </>
   );
 };
