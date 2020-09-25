@@ -25,8 +25,8 @@ const BaiTapGioHangFunc: React.FC = () => {
       price: sanpham.price,
       soLuong: 1,
     };
-    const listGioHang = [...gioHang];
-    const index = findIndexByID(listGioHang, sanPhamGioHang.id);
+    const listGioHang: SanPhamGioHangType[] = [...gioHang];
+    const index: number = findIndexByID(listGioHang, sanPhamGioHang.id);
     index !== -1
       ? (listGioHang[index].soLuong += 1)
       : listGioHang.push(sanPhamGioHang);
@@ -34,15 +34,15 @@ const BaiTapGioHangFunc: React.FC = () => {
   };
 
   const handleXoaSanPham = (id: number): void => {
-    const listGioHang = [...gioHang];
-    const index = findIndexByID(listGioHang, id);
+    const listGioHang: SanPhamGioHangType[] = [...gioHang];
+    const index: number = findIndexByID(listGioHang, id);
     index !== -1 && listGioHang.splice(index, 1);
     setGiohang(listGioHang);
   };
 
-  const hanldeTangGiamSL = (id: number, bool: boolean): void | null=> {
-    const listGioHang = [...gioHang];
-    const index = findIndexByID(listGioHang, id);
+  const hanldeTangGiamSL = (id: number, bool: boolean): void | null => {
+    const listGioHang: SanPhamGioHangType[] = [...gioHang];
+    const index: number = findIndexByID(listGioHang, id);
     if (index === -1) return null;
     if (bool) listGioHang[index].soLuong += 1;
     if (!bool) listGioHang[index].soLuong -= 1;
