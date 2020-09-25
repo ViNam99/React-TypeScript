@@ -32,6 +32,10 @@ const BaiTapGioHangFunc: React.FC = () => {
     setGiohang(listGioHang);
   };
 
+  const totalSanPham = gioHang.reduce((total, spGioHang) => {
+    return (total += spGioHang.soLuong);
+  }, 0);
+
   return (
     <>
       <h2 className="text-center p-5 bg-dark text-light">Bài Tập Giỏ Hàng</h2>
@@ -41,7 +45,7 @@ const BaiTapGioHangFunc: React.FC = () => {
         data-target="#exampleModal"
         style={{ cursor: "pointer" }}
       >
-        Giỏ Hàng (0)
+        Giỏ Hàng ({totalSanPham})
       </p>
       <DanhSachSanPham
         handleXemChiTietSanPhamRoot={handleXemChiTietSanPham}
