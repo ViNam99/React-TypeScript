@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import DienThoaiType from "../../models/SanPhamState";
+import DienThoaiType from "../../models/DienThoaiType";
 
 export interface SanPhamProps {
   key?: number;
   sanpham: DienThoaiType;
+  handleXemChiTietDS?: (sanpham: DienThoaiType) => void;
+  handleMuaSanPhamDS?: (sanpham: DienThoaiType) => void;
 }
 class SanPham extends Component<SanPhamProps> {
   renderSanPham = () => {
-    const { sanpham } = this.props;
+    const { sanpham, handleXemChiTietDS, handleMuaSanPhamDS } = this.props;
     return (
       <div className="card" style={{ width: "18rem" }}>
         <img src={sanpham.image} className="card-img-top" alt="..." />
@@ -16,8 +18,18 @@ class SanPham extends Component<SanPhamProps> {
           <p className="card-text">{sanpham.description}</p>
         </div>
         <div className="card-footer">
-          <button className="btn btn-success mr-2">Mua</button>
-          <button className="btn btn-primary ml-2">Xem</button>
+          <button
+            className="btn btn-success mr-2"
+            onClick={() => handleMuaSanPhamDS?.(sanpham)}
+          >
+            Mua
+          </button>
+          <button
+            className="btn btn-primary ml-2"
+            onClick={() => handleXemChiTietDS?.(sanpham)}
+          >
+            Xem
+          </button>
         </div>
       </div>
     );
