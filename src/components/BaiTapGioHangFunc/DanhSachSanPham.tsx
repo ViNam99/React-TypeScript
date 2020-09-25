@@ -5,12 +5,17 @@ import SanPham from "./SanPham";
 
 interface DanhSachSanPhamProps {
   handleXemChiTietSanPhamRoot?: (sanpham: DienThoaiType) => void;
+  handleMuaSanPhamRoot?: (sanpham: DienThoaiType) => void;
 }
 const DanhSachSanPham: React.FC<DanhSachSanPhamProps> = (props) => {
   const [danhSachDienThoai] = useState<DienThoaiType[]>(danhsachDTJSON);
-  const { handleXemChiTietSanPhamRoot } = props;
+  const { handleXemChiTietSanPhamRoot, handleMuaSanPhamRoot } = props;
   const handleXemChiTietSanPham = (sanpham: DienThoaiType) => {
     handleXemChiTietSanPhamRoot?.(sanpham);
+  };
+
+  const handleMuaSanPham = (sanpham: DienThoaiType) => {
+    handleMuaSanPhamRoot?.(sanpham);
   };
   const renderListDienThoai = (): JSX.Element[] | undefined => {
     if (!danhSachDienThoai) return;
@@ -20,6 +25,7 @@ const DanhSachSanPham: React.FC<DanhSachSanPhamProps> = (props) => {
           sanpham={sanpham}
           key={sanpham.id}
           handleXemChiTietSanPhamDS={handleXemChiTietSanPham}
+          handleMuaSanPhamDS={handleMuaSanPham}
         />
       );
     });
