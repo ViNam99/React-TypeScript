@@ -8,7 +8,7 @@ interface SanPhamPropsI {
 }
 const SanPham: React.FC<SanPhamPropsI> = ({ ...props }) => {
   const { sanpham } = props;
-  const { xemChitietSanPham } = useContext(GioHangHookContext);
+  const { xemChitietSanPham, muaSanPham } = useContext(GioHangHookContext);
   const renderSanPham = (): JSX.Element => {
     return (
       <div className="card" style={{ width: "18rem" }}>
@@ -18,7 +18,12 @@ const SanPham: React.FC<SanPhamPropsI> = ({ ...props }) => {
           <p className="card-text">{sanpham?.description}</p>
         </div>
         <div className="card-footer">
-          <button className="btn btn-success mr-2">Mua</button>
+          <button
+            className="btn btn-success mr-2"
+            onClick={() => muaSanPham?.(sanpham)}
+          >
+            Mua
+          </button>
           <button
             className="btn btn-primary ml-2"
             onClick={() => xemChitietSanPham?.(sanpham)}

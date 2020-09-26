@@ -1,6 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
+import { GioHangHookContext } from "../../common/context/GioHangContextHook";
 
 const ModalSanPham: React.FC = () => {
+  const { gioHang } = useContext(GioHangHookContext);
+
+  const renderSanPhamTrongGioHang = (): JSX.Element[] | undefined => {
+    return gioHang?.map((sp, index) => {
+      return (
+        <tr key={index}>
+          <td>{sp.id}</td>
+          <td>{sp.name}</td>
+          <td>
+            <img src={sp.image} alt="img" width="50px" height="50px" />
+          </td>
+          <td>
+            <button className="btn btn-primary mr-2">-</button>
+            {sp.soLuong}
+            <button className="btn btn-primary ml-2">+</button>
+          </td>
+          <td>{sp.price}</td>
+          <td>{sp.price * sp.soLuong}</td>
+          <td>
+            <button className="btn btn-danger">X</button>
+          </td>
+        </tr>
+      );
+    });
+  };
+
   return (
     <>
       <div>
@@ -41,7 +68,7 @@ const ModalSanPham: React.FC = () => {
                       <th></th>
                     </tr>
                   </thead>
-                  {/* <tbody>{renderSanPhamTrongGioHang()}</tbody> */}
+                  <tbody>{renderSanPhamTrongGioHang()}</tbody>
                 </table>
               </div>
               <div className="modal-footer">
