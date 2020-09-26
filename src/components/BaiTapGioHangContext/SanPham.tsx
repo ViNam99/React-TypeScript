@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import { Consumer } from "../../common/context/GioHangContext";
 import DienThoaiType from "../../models/DienThoaiType";
+import GioHangContextI from "../../models/GioHangContextType";
 interface SanPhamProps {
-  sanpham?: DienThoaiType;
+  sanpham: DienThoaiType;
 }
 class SanPham extends Component<SanPhamProps> {
-  renderSanPham = (): JSX.Element => {
+  renderSanPham = (context: GioHangContextI): JSX.Element => {
     const { sanpham } = this.props;
     return (
       <div className="card" style={{ width: "18rem" }}>
@@ -15,13 +17,24 @@ class SanPham extends Component<SanPhamProps> {
         </div>
         <div className="card-footer">
           <button className="btn btn-success mr-2">Mua</button>
-          <button className="btn btn-primary ml-2">Xem</button>
+          <button
+            className="btn btn-primary ml-2"
+            onClick={() => context.xemChitietSanPham?.(sanpham)}
+          >
+            Xem
+          </button>
         </div>
       </div>
     );
   };
   render() {
-    return <div className="col-lg-4">{this.renderSanPham()}</div>;
+    return (
+      <div className="col-lg-4">
+        <Consumer>
+          {(context) => context && <>{this.renderSanPham(context)}</>}
+        </Consumer>
+      </div>
+    );
   }
 }
 export default SanPham;

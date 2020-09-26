@@ -1,10 +1,7 @@
 import React, { Component, createContext } from "react";
 import DienThoaiType from "../../models/DienThoaiType";
 import listDTJson from "../../utils/danhSachDienThoai.json";
-
-interface GioHangContextI {
-  danhSachDienThoai: DienThoaiType[];
-}
+import GioHangContextI from "../../models/GioHangContextType";
 
 interface GioHangContextState extends GioHangContextI {}
 
@@ -21,8 +18,16 @@ class GioHangProvider extends Component<GioHangProps, GioHangContextState> {
     super(props);
     this.state = {
       danhSachDienThoai: listDTJson,
+      chitietSanPham: {} as DienThoaiType,
+      xemChitietSanPham: this.handleXemChiTietSanPham,
     };
   }
+
+  handleXemChiTietSanPham = (sanpham: DienThoaiType): void => {
+    this.setState({
+      chitietSanPham: sanpham,
+    });
+  };
 
   render() {
     return <Provider value={this.state}>{this.props.children}</Provider>;
