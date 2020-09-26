@@ -9,5 +9,6 @@ interface GioHangContextHookType {
   muaSanPham?: (sampham: DienThoaiType) => void;
   xoaSanPham?: (id: number) => void;
   tangGiamSL?: (id: number, bool: boolean) => void;
+  setGioHang?: (data: Array<SanPhamGioHangType>) => void;
 }
 export default GioHangContextHookType;

@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import DienThoaiType from "../../models/DienThoaiType";
 import GioHangContextHookI from "../../models/GioHangContextHookType";
 import SanPhamGioHangType from "../../models/SanPhamGioHangType";
@@ -13,6 +13,10 @@ const GioHangContextHookProvider = ({ ...props }) => {
   const [listSanPham] = useState<DienThoaiType[]>(listDTJSON);
   const [chitiet, setChitiet] = useState<DienThoaiType>({} as DienThoaiType);
   const [gioHang, setGioHang] = useState<Array<SanPhamGioHangType>>([]);
+
+  useEffect(() => {
+    if (gioHang) localStorage.setItem("gioHang", JSON.stringify(gioHang));
+  }, [gioHang]);
 
   const findIndexById = (arr: SanPhamGioHangType[], id: number): number => {
     return arr.findIndex((sp: SanPhamGioHangType) => sp.id === id);
@@ -57,6 +61,10 @@ const GioHangContextHookProvider = ({ ...props }) => {
     setGioHang(listGioHang);
   };
 
+  const handleSetGioHang = (data: SanPhamGioHangType[]): void => {
+    setGioHang(data);
+  };
+
   const store: GioHangContextHookI = {
     danhSachSanPham: listSanPham,
     chitietSanPham: chitiet,
@@ -65,6 +73,7 @@ const GioHangContextHookProvider = ({ ...props }) => {
     muaSanPham: handleMuaSanPham,
     xoaSanPham: handleXoaSanPham,
     tangGiamSL: handleTangGiamSL,
+    setGioHang: handleSetGioHang,
   };
 
   return <Provider value={{ ...store }}>{props.children}</Provider>;

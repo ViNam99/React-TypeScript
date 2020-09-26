@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { GioHangHookContext } from "../../common/context/GioHangContextHook";
 import SanPhamGioHangType from "../../models/SanPhamGioHangType";
 import ChitietSanPham from "./ChitietSanPham";
@@ -6,7 +6,14 @@ import DanhSachSanPham from "./DanhSachSanPham";
 import ModalSanPham from "./ModalSanPham";
 
 const BaiTapGioHangContextHook: React.FC = () => {
-  const { chitietSanPham, gioHang } = useContext(GioHangHookContext);
+  const { chitietSanPham, gioHang, setGioHang } = useContext(
+    GioHangHookContext
+  );
+
+  useEffect(() => {
+    const data = localStorage.getItem("gioHang");
+    if (data) setGioHang?.(JSON.parse(data));
+  }, []);
 
   const totalSanPham = gioHang?.reduce(
     (total: number, spGioHang: SanPhamGioHangType): number => {
