@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { GioHangHookContext } from "../../common/context/GioHangContextHook";
 
 const ModalSanPham: React.FC = () => {
-  const { gioHang } = useContext(GioHangHookContext);
+  const { gioHang, xoaSanPham, tangGiamSL } = useContext(GioHangHookContext);
 
   const renderSanPhamTrongGioHang = (): JSX.Element[] | undefined => {
     return gioHang?.map((sp, index) => {
@@ -14,14 +14,29 @@ const ModalSanPham: React.FC = () => {
             <img src={sp.image} alt="img" width="50px" height="50px" />
           </td>
           <td>
-            <button className="btn btn-primary mr-2">-</button>
+            <button
+              className="btn btn-primary mr-2"
+              onClick={() => tangGiamSL?.(sp.id, false)}
+            >
+              -
+            </button>
             {sp.soLuong}
-            <button className="btn btn-primary ml-2">+</button>
+            <button
+              className="btn btn-primary ml-2"
+              onClick={() => tangGiamSL?.(sp.id, true)}
+            >
+              +
+            </button>
           </td>
           <td>{sp.price}</td>
           <td>{sp.price * sp.soLuong}</td>
           <td>
-            <button className="btn btn-danger">X</button>
+            <button
+              className="btn btn-danger"
+              onClick={() => xoaSanPham?.(sp.id)}
+            >
+              X
+            </button>
           </td>
         </tr>
       );

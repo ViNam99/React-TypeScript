@@ -39,12 +39,32 @@ const GioHangContextHookProvider = ({ ...props }) => {
     setGioHang(listGioHang);
   };
 
+  const handleXoaSanPham = (id: number): void => {
+    const listGioHang: SanPhamGioHangType[] = [...gioHang];
+    const index = findIndexById(listGioHang, id);
+    index !== -1 && listGioHang.splice(index, 1);
+    setGioHang(listGioHang);
+  };
+
+  const handleTangGiamSL = (id: number, bool: boolean): void => {
+    const listGioHang: SanPhamGioHangType[] = [...gioHang];
+    const index = findIndexById(listGioHang, id);
+    if (index === -1) return;
+    bool
+      ? (listGioHang[index].soLuong += 1)
+      : (listGioHang[index].soLuong -= 1);
+    listGioHang[index].soLuong < 1 && listGioHang.splice(index, 1);
+    setGioHang(listGioHang);
+  };
+
   const store: GioHangContextHookI = {
     danhSachSanPham: listSanPham,
     chitietSanPham: chitiet,
     gioHang,
     xemChitietSanPham: handleXemChiTietSanPham,
     muaSanPham: handleMuaSanPham,
+    xoaSanPham: handleXoaSanPham,
+    tangGiamSL: handleTangGiamSL,
   };
 
   return <Provider value={{ ...store }}>{props.children}</Provider>;

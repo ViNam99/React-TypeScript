@@ -4,8 +4,10 @@ import SanPhamGioHangType from "./SanPhamGioHangType";
 interface GioHangContextHookType {
   danhSachSanPham: DienThoaiType[];
   chitietSanPham?: DienThoaiType;
-  gioHang?: Array<SanPhamGioHangType>
+  gioHang?: Array<SanPhamGioHangType>;
   xemChitietSanPham?: (sanpham: DienThoaiType) => void;
   muaSanPham?: (sampham: DienThoaiType) => void;
+  xoaSanPham?: (id: number) => void;
+  tangGiamSL?: (id: number, bool: boolean) => void;
 }
 export default GioHangContextHookType;
