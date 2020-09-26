@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { Consumer } from "../../common/context/GioHangContext";
-import SanPhamGioHangType from "../../models/SanPhamGioHangType";
+import GioHangContextI from "../../models/GioHangContextType";
 
 class ModalSanPham extends Component {
-  renderSanPhamTrongGioHang = (
-    gioHang: SanPhamGioHangType[]
-  ): JSX.Element[] => {
+  renderSanPhamTrongGioHang = (context: GioHangContextI): JSX.Element[] => {
+    const { gioHang, xoaSanPham } = context;
     return gioHang.map((sp, index) => {
       return (
         <tr key={index}>
@@ -22,7 +21,12 @@ class ModalSanPham extends Component {
           <td>{sp.price}</td>
           <td>{sp.price * sp.soLuong}</td>
           <td>
-            <button className="btn btn-danger">X</button>
+            <button
+              className="btn btn-danger"
+              onClick={() => xoaSanPham?.(sp.id)}
+            >
+              X
+            </button>
           </td>
         </tr>
       );
@@ -73,9 +77,7 @@ class ModalSanPham extends Component {
                       <Consumer>
                         {(context) =>
                           context && (
-                            <>
-                              {this.renderSanPhamTrongGioHang(context.gioHang)}
-                            </>
+                            <>{this.renderSanPhamTrongGioHang(context)}</>
                           )
                         }
                       </Consumer>

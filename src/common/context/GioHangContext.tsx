@@ -23,6 +23,7 @@ class GioHangProvider extends Component<GioHangProps, GioHangContextState> {
       xemChitietSanPham: this.handleXemChiTietSanPham,
       muaSanPham: this.handleMuaSanPham,
       gioHang: [],
+      xoaSanPham: this.handleXoaSanPham,
     };
   }
 
@@ -50,6 +51,15 @@ class GioHangProvider extends Component<GioHangProps, GioHangContextState> {
     index === -1
       ? listGioHang.push(sanPhamGioHang)
       : (listGioHang[index].soLuong += 1);
+    this.setState({
+      gioHang: listGioHang,
+    });
+  };
+
+  handleXoaSanPham = (id: number) => {
+    const listGioHang: SanPhamGioHangType[] = [...this.state.gioHang];
+    const index = this.findIndexById(listGioHang, id);
+    index !== -1 && listGioHang.splice(index, 1);
     this.setState({
       gioHang: listGioHang,
     });
