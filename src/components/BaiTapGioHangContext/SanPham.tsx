@@ -16,7 +16,12 @@ class SanPham extends Component<SanPhamProps> {
           <p className="card-text">{sanpham?.description}</p>
         </div>
         <div className="card-footer">
-          <button className="btn btn-success mr-2">Mua</button>
+          <button
+            className="btn btn-success mr-2"
+            onClick={() => context.muaSanPham?.(sanpham)}
+          >
+            Mua
+          </button>
           <button
             className="btn btn-primary ml-2"
             onClick={() => context.xemChitietSanPham?.(sanpham)}

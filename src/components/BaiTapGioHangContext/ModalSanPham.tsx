@@ -1,6 +1,33 @@
 import React, { Component } from "react";
+import { Consumer } from "../../common/context/GioHangContext";
+import SanPhamGioHangType from "../../models/SanPhamGioHangType";
 
 class ModalSanPham extends Component {
+  renderSanPhamTrongGioHang = (
+    gioHang: SanPhamGioHangType[]
+  ): JSX.Element[] => {
+    return gioHang.map((sp, index) => {
+      return (
+        <tr key={index}>
+          <td>{sp.id}</td>
+          <td>{sp.name}</td>
+          <td>
+            <img src={sp.image} alt="img" width="50px" height="50px" />
+          </td>
+          <td>
+            <button className="btn btn-primary mr-2">-</button>
+            {sp.soLuong}
+            <button className="btn btn-primary ml-2">+</button>
+          </td>
+          <td>{sp.price}</td>
+          <td>{sp.price * sp.soLuong}</td>
+          <td>
+            <button className="btn btn-danger">X</button>
+          </td>
+        </tr>
+      );
+    });
+  };
   render() {
     return (
       <>
@@ -42,7 +69,17 @@ class ModalSanPham extends Component {
                         <th></th>
                       </tr>
                     </thead>
-                    {/* <tbody>{this.renderSanPhamTrongGioHang()}</tbody> */}
+                    <tbody>
+                      <Consumer>
+                        {(context) =>
+                          context && (
+                            <>
+                              {this.renderSanPhamTrongGioHang(context.gioHang)}
+                            </>
+                          )
+                        }
+                      </Consumer>
+                    </tbody>
                   </table>
                 </div>
                 <div className="modal-footer">
