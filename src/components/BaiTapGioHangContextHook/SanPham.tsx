@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import { GioHangHookContext } from "../../common/context/GioHangContextHook";
 import DienThoaiType from "../../models/DienThoaiType";
 
 interface SanPhamPropsI {
-  sanpham?: DienThoaiType;
+  sanpham: DienThoaiType;
   key?: number;
 }
 const SanPham: React.FC<SanPhamPropsI> = ({ ...props }) => {
   const { sanpham } = props;
+  const { xemChitietSanPham } = useContext(GioHangHookContext);
   const renderSanPham = (): JSX.Element => {
     return (
       <div className="card" style={{ width: "18rem" }}>
@@ -17,7 +19,12 @@ const SanPham: React.FC<SanPhamPropsI> = ({ ...props }) => {
         </div>
         <div className="card-footer">
           <button className="btn btn-success mr-2">Mua</button>
-          <button className="btn btn-primary ml-2">Xem</button>
+          <button
+            className="btn btn-primary ml-2"
+            onClick={() => xemChitietSanPham?.(sanpham)}
+          >
+            Xem
+          </button>
         </div>
       </div>
     );

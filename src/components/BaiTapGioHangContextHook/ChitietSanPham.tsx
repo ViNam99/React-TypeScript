@@ -1,11 +1,16 @@
 import React from "react";
+import DienThoaiType from "../../models/DienThoaiType";
 
-const ChitietSanPham: React.FC = () => {
+interface ChitietSanPhamPropsI {
+  chitiet: DienThoaiType;
+}
+const ChitietSanPham: React.FC<ChitietSanPhamPropsI> = ({ ...props }) => {
+  const { chitiet } = props;
   return (
     <div className="row mt-5">
       <div className="col-lg-6">
         <img
-          //   src={chitiet.image}
+          src={chitiet.image}
           className="card-img-top"
           alt="..."
           height="400px"
@@ -16,19 +21,19 @@ const ChitietSanPham: React.FC = () => {
           <tbody>
             <tr>
               <th>Tên điện thoại</th>
-              {/* <td>{chitiet.name}</td> */}
+              <td>{chitiet.name}</td>
             </tr>
             <tr>
               <th>Mô tả</th>
-              {/* <td>{chitiet.description}</td> */}
+              <td>{chitiet.description}</td>
             </tr>
             <tr>
               <th>Giá</th>
-              {/* <td>{chitiet.price}$</td> */}
+              <td>{chitiet.price}$</td>
             </tr>
             <tr>
               <th>Hàng tồn</th>
-              {/* <td>{chitiet.invetory}</td> */}
+              <td>{chitiet.invetory}</td>
             </tr>
           </tbody>
         </table>

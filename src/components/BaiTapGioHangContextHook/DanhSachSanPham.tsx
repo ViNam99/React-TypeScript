@@ -6,8 +6,8 @@ import SanPham from "./SanPham";
 const DanhSachSanPham: React.FC = () => {
   const { danhSachSanPham } = useContext(GioHangHookContext);
   const renderDanhSachSanPham = (): JSX.Element[] | undefined => {
-    if (danhSachSanPham.length < 0) return;
-    return danhSachSanPham.map(
+    if (danhSachSanPham && danhSachSanPham.length < 0) return;
+    return danhSachSanPham?.map(
       (sanpham: DienThoaiType): JSX.Element => {
         return <SanPham sanpham={sanpham} key={sanpham.id} />;
       }
