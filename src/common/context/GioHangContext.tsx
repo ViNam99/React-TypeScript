@@ -3,7 +3,6 @@ import DienThoaiType from "../../models/DienThoaiType";
 import listDTJson from "../../utils/danhSachDienThoai.json";
 import GioHangContextI from "../../models/GioHangContextType";
 import SanPhamGioHangType from "../../models/SanPhamGioHangType";
-import { truncate } from "fs";
 
 interface GioHangContextState extends GioHangContextI {}
 
@@ -27,6 +26,22 @@ class GioHangProvider extends Component<GioHangProps, GioHangContextState> {
       xoaSanPham: this.handleXoaSanPham,
       tangGiamSL: this.handleTangGiamSL,
     };
+  }
+
+  componentDidMount() {
+    const data = localStorage.getItem("gioHang");
+    data &&
+      this.setState({
+        gioHang: JSON.parse(data),
+      });
+  }
+
+  componentDidUpdate(prevstate: any, prevProps: any) {
+    if (prevstate.gioHang !== this.state.gioHang)
+      return localStorage.setItem(
+        "gioHang",
+        JSON.stringify(this.state.gioHang)
+      );
   }
 
   findIndexById = (arr: SanPhamGioHangType[], id: number): number => {
