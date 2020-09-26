@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DienThoaiType from "../../models/DienThoaiType";
 import SanPhamGioHangType from "../../models/SanPhamGioHangType";
 import ChitietSanPham from "./ChitietSanPham";
@@ -8,6 +8,15 @@ import ModalSanPham from "./ModalSanPham";
 const BaiTapGioHangFunc: React.FC = () => {
   const [chitetSP, setchitietSP] = useState<DienThoaiType>({} as DienThoaiType);
   const [gioHang, setGiohang] = useState<SanPhamGioHangType[]>([]);
+
+  useEffect(() => {
+    const data: string | null = localStorage.getItem("gioHang");
+    if (data) setGiohang(JSON.parse(data));
+  }, []);
+
+  useEffect(() => {
+    return localStorage.setItem("gioHang", JSON.stringify(gioHang));
+  }, [gioHang]);
 
   const findIndexByID = (arr: SanPhamGioHangType[], id: number): number => {
     return arr.findIndex((sp: SanPhamGioHangType) => sp.id === id);
