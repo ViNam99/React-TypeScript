@@ -3,6 +3,7 @@ import DienThoaiType from "../../models/DienThoaiType";
 import listDTJson from "../../utils/danhSachDienThoai.json";
 import GioHangContextI from "../../models/GioHangContextType";
 import SanPhamGioHangType from "../../models/SanPhamGioHangType";
+import { truncate } from "fs";
 
 interface GioHangContextState extends GioHangContextI {}
 
@@ -24,6 +25,7 @@ class GioHangProvider extends Component<GioHangProps, GioHangContextState> {
       muaSanPham: this.handleMuaSanPham,
       gioHang: [],
       xoaSanPham: this.handleXoaSanPham,
+      tangGiamSL: this.handleTangGiamSL,
     };
   }
 
@@ -60,6 +62,18 @@ class GioHangProvider extends Component<GioHangProps, GioHangContextState> {
     const listGioHang: SanPhamGioHangType[] = [...this.state.gioHang];
     const index = this.findIndexById(listGioHang, id);
     index !== -1 && listGioHang.splice(index, 1);
+    this.setState({
+      gioHang: listGioHang,
+    });
+  };
+
+  handleTangGiamSL = (id: number, bool: boolean): void => {
+    const listGioHang: SanPhamGioHangType[] = [...this.state.gioHang];
+    const index = this.findIndexById(listGioHang, id);
+    if (index === -1) return;
+    if (bool) listGioHang[index].soLuong += 1;
+    if (!bool) listGioHang[index].soLuong -= 1;
+    if (listGioHang[index].soLuong < 1) listGioHang.splice(index, 1);
     this.setState({
       gioHang: listGioHang,
     });

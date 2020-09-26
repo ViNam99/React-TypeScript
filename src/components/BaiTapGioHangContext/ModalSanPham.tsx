@@ -4,7 +4,7 @@ import GioHangContextI from "../../models/GioHangContextType";
 
 class ModalSanPham extends Component {
   renderSanPhamTrongGioHang = (context: GioHangContextI): JSX.Element[] => {
-    const { gioHang, xoaSanPham } = context;
+    const { gioHang, xoaSanPham, tangGiamSL } = context;
     return gioHang.map((sp, index) => {
       return (
         <tr key={index}>
@@ -14,9 +14,19 @@ class ModalSanPham extends Component {
             <img src={sp.image} alt="img" width="50px" height="50px" />
           </td>
           <td>
-            <button className="btn btn-primary mr-2">-</button>
+            <button
+              className="btn btn-primary mr-2"
+              onClick={() => tangGiamSL?.(sp.id, false)}
+            >
+              -
+            </button>
             {sp.soLuong}
-            <button className="btn btn-primary ml-2">+</button>
+            <button
+              className="btn btn-primary ml-2"
+              onClick={() => tangGiamSL?.(sp.id, true)}
+            >
+              +
+            </button>
           </td>
           <td>{sp.price}</td>
           <td>{sp.price * sp.soLuong}</td>
